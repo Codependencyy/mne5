@@ -1,0 +1,99 @@
+import random
+c = 1
+b = 0
+print('Привет. Ты таракан из 221 комнаты студенческого общежития.')
+print('В этой игре твоя задача - прожить три дня.')
+print('Выжил - молодец, не выжил - ничего страшного, попробуй еще раз.')
+print('Как тебя зовут?')
+name = input()
+print(f'Хорошо, {name}, для ответа вводи цифру, под котрой указан выбранный вариант.')
+while c==1:
+    sleep = 100
+    food = 50
+    health = 100
+    deistviya = 3
+    day = 0
+    smert = 0
+
+
+    def statistika():
+        print('Сон:', sleep)
+        print('Голод:', food)
+        print('Здоровье:', health)
+
+
+    def est():
+        global sleep
+        global food
+        sleep = sleep - 20
+        food = food + 30
+
+
+    def spat():
+        global food
+        global sleep
+        global health
+        sleep = sleep + 30
+        food = food - 15
+        health = health + 30
+
+
+    def gulyat():
+        global health
+        global sleep
+        global food
+        global b
+        b = random.randint(1, 3)
+        if b == 1:
+            print('Пока ты гулял по тебе прошлась толпа студентов.')
+        if b == 2:
+            print('Пока ты гулял, ты встретил уборщицу и тебе пришлось побегать от швабры.')
+            print('Один раз уборщице все же удалось помыть тебя.')
+        if b == 3:
+            print('Пока ты гулял, ты встретил таракана каннибала, он попытался откусить твою лапку.')
+        health = health - 35
+        sleep = sleep - 20
+        food = food - 20
+
+
+    while day < 3:
+        day += 1
+        deistviya = 3
+        print('=========')
+        print('День', day)
+        print('=========')
+        while deistviya != 0:
+            if health <= 0 or food<= 0 or sleep <= 0:
+                print('К сожалению, ты умер...')
+                day = 4
+                smert = 1
+                break
+            statistika()
+            print(f'Чем займешься, {name}?')
+            print('1. Покушать')
+            print('2. Поспать')
+            print('3. Прогуляться')
+            deistviya -= 1
+            otvet = int(input())
+            if otvet==1:
+                est()
+            elif otvet==2:
+                spat()
+            elif otvet==3:
+                gulyat()
+            else:
+                print('Введено недопустимое значение.')
+                otvet = int(input())
+    if smert == 0:
+        statistika()
+        print(f'Молодец, {name}, ты выиграл!')
+    print('=======================')
+    print('Хочешь сыграть еще раз?')
+    print('1. Да')
+    print('2. Нет')
+    cc = int(input())
+    if cc == 1:
+        c = 1
+    elif cc == 2:
+        c = 0
+        print(f'Нет так нет, пока, {name}!')
