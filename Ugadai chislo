@@ -1,0 +1,54 @@
+import random
+a=0
+print ("Привет, как тебя зовут?")
+name = input()
+print(f"Отлично, {name}! Сыграем в игру. Я загадаю число, а ты должен его угадать.")
+while a==0:
+    print('Введи количество попыток.')
+    popitki=int(input())
+    if popitki<=0:
+        print('Ты можешь ввести количество попыток только больше 0.')
+        popitki = int(input())
+        if popitki<=0:
+            while popitki<=0:
+                print('Ты что издеваешься?')
+                popitki=int(input())
+        else:
+            print(f'Количество попыток: {popitki}')
+    else:
+        print(f'Количество попыток: {popitki}')
+    print("Выбери диапазон. Для этого введи два числа в строку (от скольки и до скольки).")
+    _from, _to=map(int,input().split())
+    if _from>_to:
+        print('Диапазон задан неверно. Начальное число должно быть больше конечного. Попробуй еще раз.')
+        _from, _to = map(int, input().split())
+        if _from>_to:
+            while _from>_to:
+                print('Ты что издеваешься?')
+                _from,_to=map(int,input().split())
+        else:
+            print(f'Отлично, задан диапазон от {_from} до {_to}.')
+    else:
+        print(f'Отлично, задан диапазон от {_from} до {_to}.')
+    number=random.randint(_from, _to)
+    c=0
+    while c<popitki:
+        print('Введи число:')
+        chislo=int(input())
+        c+=1
+        if chislo<number:
+            print('Загаданное число больше.')
+        if chislo>number:
+            print('Загаданное число меньше.')
+        if chislo==number:
+            print(f'Молодец, {name}, ты угадал число за {c} попыток!')
+            break
+        if c==popitki:
+            print(f'К сожалению, ты проиграл... Загаданное число {number}.')
+    print('Хочешь сыграть еще раз? (Введи да или нет).')
+    otvet=input()
+    if otvet=='да':
+        a=0
+    if otvet=='нет':
+        print(f'Нет так нет. Пока, {name}!')
+        a+=1
