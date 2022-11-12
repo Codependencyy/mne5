@@ -7,3 +7,19 @@ for i in range(4):
     forward(50)
     left(90)
 done()
+
+
+=================
+
+from turtle import *
+shape("turtle")
+color('black', 'pink')
+pensize(6)
+begin_fill()
+while True:
+    forward(200)
+    left(90)
+    if abs(pos()) < 1:
+        break
+end_fill()
+done()
